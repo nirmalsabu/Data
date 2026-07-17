@@ -3,20 +3,20 @@
 This project provides a modular FastAPI-based book management service with:
 
 - Async SQLAlchemy database access
-- Authentication and JWT-based login
+- JWT-based authentication
 - Book CRUD operations
-- Review management
-- Summary generation hooks for Llama-style models
-- Unit tests for core CRUD and auth modules
+- Review collection and summary support
+- Modular services for future Llama-style AI integration
+- Unit tests for core CRUD and auth behavior
 
 ## Project structure
 
-- app/api/routes: API endpoints
-- app/core: application configuration and dependency wiring
-- app/db: database models and CRUD modules
-- app/schemas: request and response schemas
-- app/services: AI/summary-related logic
-- tests/unit: unit tests
+- app/api/routes: API endpoint modules
+- app/core: settings and dependency wiring
+- app/db: database models and CRUD logic
+- app/schemas: request and response models
+- app/services: summary and AI-related services
+- tests/unit: automated unit tests
 
 ## Requirements
 
@@ -34,7 +34,7 @@ Start the API:
 uvicorn main:app --reload
 ```
 
-Then browse to:
+Open:
 
 - http://127.0.0.1:8000/docs for Swagger UI
 - http://127.0.0.1:8000/redoc for ReDoc
@@ -55,6 +55,8 @@ Then browse to:
 - POST /books/{id}/reviews
 - GET /books/{id}/reviews
 - GET /books/{id}/summary
+- GET /recommendations
+- POST /generate-summary
 
 ## Testing
 
@@ -64,6 +66,14 @@ Run tests:
 pytest -q
 ```
 
-## Cloud deployment note
+## Docker deployment
 
-The API is designed to be deployed to a cloud platform such as Render, Railway, or Azure App Service. In this starter version, it uses SQLite for local development while remaining ready to switch to PostgreSQL in production.
+Build and run with Docker Compose:
+
+```bash
+docker compose up --build
+```
+
+## Cloud deployment path
+
+This service is structured so it can be deployed to a cloud platform such as Render, Railway, Azure App Service, or AWS ECS. The current local setup uses SQLite for simplicity, and the config layer is already isolated so it can be swapped to PostgreSQL in production.

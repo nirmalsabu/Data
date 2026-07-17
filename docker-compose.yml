@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  api:
+    build: .
+    container_name: book-management-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///./bookstore.db
